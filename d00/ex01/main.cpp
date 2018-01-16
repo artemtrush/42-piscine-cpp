@@ -15,9 +15,7 @@ int		main(void)
 	do
 	{
 		std::cout << "Enter a command [ADD | SEARCH | EXIT]: ";
-		std::cin >> buf;
-		std::cin.clear(); 
-		std::cin.ignore(10000, '\n');
+		std::getline (std::cin, buf);
 		if (std::cin.eof())
 			return 0;
 		if (buf == "ADD")
@@ -48,11 +46,9 @@ int		main(void)
 					array[i].printRow(i + 1);
 				}
 				std::cout << "Enter index: ";
-				std::cin >> buf;
+				std::getline (std::cin, buf);
 				if (std::cin.eof())
 					return 0;
-				std::cin.clear(); 
-				std::cin.ignore(10000, '\n');
 				index = (buf.length() == 1) ? buf[0] - 49 : -1;
 				if (index < 0 || index >= contact)
 				{

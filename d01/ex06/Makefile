@@ -1,10 +1,15 @@
-CPP = clang++
-HPP = Society.class.hpp
+CPP = 	clang++
+HPP =	HumanA.hpp \
+		HumanB.hpp \
+		Weapon.hpp \
+
 CPPFLAGS = -Wall -Werror -Wextra
-NAME = society
+NAME = violence
 
 OBJ =	main.o \
-		Society.class.o
+		HumanA.o \
+		HumanB.o \
+		Weapon.o
 
 all: $(NAME)
 

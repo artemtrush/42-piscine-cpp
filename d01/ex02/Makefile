@@ -1,10 +1,13 @@
 CPP = clang++
-HPP = Society.class.hpp
+HPP = 	Zombie.hpp \
+		ZombieEvent.hpp
+
 CPPFLAGS = -Wall -Werror -Wextra
-NAME = society
+NAME = zombie
 
 OBJ =	main.o \
-		Society.class.o
+		Zombie.o \
+		ZombieEvent.o
 
 all: $(NAME)
 

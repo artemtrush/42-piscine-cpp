@@ -7,9 +7,7 @@ Society::~Society (void) {}
 int			Society::setField(std::string *field, std::string name)
 {
 	std::cout << "Enter the " << name << ": ";
-	std::cin >> *field;
-	std::cin.clear(); 
-	std::cin.ignore(10000, '\n');
+	std::getline (std::cin, *field);
 	if (std::cin.eof())
 		return 0;
 	return 1;

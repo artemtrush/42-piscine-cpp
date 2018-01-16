@@ -1,17 +1,15 @@
-CPP = clang++
-HPP = Society.class.hpp
+CPP = 	clang++
 CPPFLAGS = -Wall -Werror -Wextra
-NAME = society
+NAME = replace
 
-OBJ =	main.o \
-		Society.class.o
+OBJ =	main.o 
 
 all: $(NAME)
 
 $(NAME):  $(OBJ)
 	$(CPP) $(CPPFLAGS) -o $(NAME) $(OBJ)
 
-%.o: %.cpp $(HPP)
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -o $@ -c $<
 
 clean:

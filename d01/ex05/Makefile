@@ -1,10 +1,13 @@
-CPP = clang++
-HPP = Society.class.hpp
+CPP = 	clang++
+HPP =	Brain.hpp \
+		Human.hpp
+
 CPPFLAGS = -Wall -Werror -Wextra
-NAME = society
+NAME = human
 
 OBJ =	main.o \
-		Society.class.o
+		Brain.o \
+		Human.o
 
 all: $(NAME)
 

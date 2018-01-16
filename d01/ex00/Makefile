@@ -1,10 +1,10 @@
 CPP = clang++
-HPP = Society.class.hpp
+HPP = Pony.hpp
 CPPFLAGS = -Wall -Werror -Wextra
-NAME = society
+NAME = pony
 
 OBJ =	main.o \
-		Society.class.o
+		Pony.o
 
 all: $(NAME)
 
