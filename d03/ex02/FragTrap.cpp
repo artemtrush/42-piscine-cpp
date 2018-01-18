@@ -1,25 +1,29 @@
 #include "FragTrap.hpp"
 #include <iostream>
 
-void FragTrap::initialization(std::string const & name)
+void FragTrap::child_initialization(void)
 {
-	this->_name 	= name;
-	this->_hp 		= 100;
-	this->_maxHp 	= 100;
 	this->_ep 		= 100;
 	this->_maxEp 	= 100;
-	this->_lvl 		= 1;
 	this->_mdd 		= 30;
 	this->_rdd 		= 20;
 	this->_armor 	= 5;
-	std::cout << this->_name << ": -- start bootup sequence..." << std::endl;
+	std::cout << "FragTrap constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(void) { this->initialization("Frag Bot"); }
-FragTrap::FragTrap(std::string const & name) { this->initialization(name); }
+FragTrap::FragTrap(void) : ClapTrap("Frag Bot")
+{
+	this->child_initialization();
+}
+
+FragTrap::FragTrap(std::string const & name) : ClapTrap(name)
+{
+	this->child_initialization();
+}
+
 FragTrap::~FragTrap(void) 
 {
-	std::cout << this->_name << ": I'm too pretty to die!" << std::endl;
+	std::cout << "FragTrap destructor called" << std::endl;
 }
 
 FragTrap::FragTrap(FragTrap const & src)
@@ -56,27 +60,6 @@ void	FragTrap::meleeAttack(std::string const & target)
 	std::cout << this->_name << ": Take that!" << std::endl;
 	std::cout << "[Battle]: FR4G-TP " << this->_name << " attacks " << target <<
 		" at melee, causing " << this->_mdd << " points of damage." << std::endl;
-}
-
-void	FragTrap::takeDamage(unsigned int amount)
-{
-	amount = (amount <= this->_armor) ? 0 : amount - this->_armor;
-	unsigned int previous = this->_hp;
-	this->_hp = (amount >= this->_hp) ? 0 : this->_hp - amount; 
-	std::cout << this->_name << ": Why do I even feel pain?!" << std::endl;
-	std::cout << "[Battle]: FR4G-TP " << this->_name << " damaged for " << 
-		previous - this->_hp << " points (" << this->_hp << ")" << std::endl;
-}
-
-void	FragTrap::beRepaired(unsigned int amount)
-{
-	unsigned int previous = this->_hp;
-	this->_hp = this->_hp + amount;
-	if (this->_hp > this->_maxHp)
-		this->_hp = this->_maxHp;
-	std::cout << this->_name << ": Sweet life juice!" << std::endl;
-	std::cout << "[Battle]: FR4G-TP " << this->_name << " healed for " << 
-		this->_hp - previous << " points (" << this->_hp << ")" << std::endl;
 }
 
 void	FragTrap::vaulthunter_dot_exe(std::string const & target)
