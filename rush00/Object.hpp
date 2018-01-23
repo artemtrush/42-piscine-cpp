@@ -1,16 +1,20 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-#define MAP_WIDTH		200
-#define MAP_HEIGHT		40
+#define	MAP_OFFSET		100
+#define MAP_WIDTH		100
+#define MAP_HEIGHT		90
 #define MAX_ENEMY_SIZE 	20
 #define MAX_ENEMY 		(MAP_WIDTH / MAX_ENEMY_SIZE)
-#define MAX_BULLET  	100
-#define MIN_SPEED		5
-#define PLAYER_COLOR 	0
-#define BORDER_COLOR 	7
-#define ENEMY_COLOR  	5
-#define BULLET_COLOR 	1
+#define MAX_BULLET  	5
+#define MIN_SPEED		50
+#define DELAY			(6666)
+
+
+#define PLAYER_COLOR 	1
+#define BORDER_COLOR 	2
+#define ENEMY_COLOR  	3
+#define BULLET_COLOR 	4
 
 class Object
 {
