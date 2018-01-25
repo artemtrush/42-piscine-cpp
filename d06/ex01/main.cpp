@@ -1,13 +1,6 @@
 #include <iostream>
 #include <ctime>
 
-struct Raw
-{
-	char	s1[9];
-	int		n;
-	char	s2[9];
-};
-
 struct Data 
 {
 	std::string	s1;
@@ -15,37 +8,40 @@ struct Data
 	std::string	s2;
 };
 
-void generate(char str[])
-{
-	std::string pull = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	for (int i = 0; i < 8; i++)
-		str[i] = pull[std::rand() % 62];
-	str[8] = 0;
-}
 
 void * serialize( void )
 {
-	Raw * data = new Raw;
-	generate(data->s1);
-	data->n = std::rand() % 100 + 1;
-	generate(data->s2);
+	char 	pull[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char	*ptr = new char[20];
 
 	std::cout << "Generated values" << std::endl;
-	std::cout << data->s1 << std::endl;
-	std::cout << data->n << std::endl;
-	std::cout << data->s2 << std::endl << std::endl;
+	for (int i = 0; i < 8; i++)
+	{
+		ptr[i] = pull[std::rand() % 62];
+		std::cout << ptr[i];
+	}
+	std::cout << std::endl;
+	
+	int	tmp = rand() % 100 + 1;
+	*(reinterpret_cast<int *>(&ptr[8])) = tmp;
+	std::cout << tmp << std::endl;
 
-	return reinterpret_cast<void *>(data);
+	for (int i = 12; i < 20; i++)
+	{
+		ptr[i] = pull[std::rand() % 62];
+		std::cout << ptr[i];
+	}
+	std::cout << std::endl << std::endl;
+	return reinterpret_cast<void *>(ptr);
 }
 
 Data * deserialize( void * raw )
 {
-	Raw  * src = reinterpret_cast<Raw *>(raw);
 	Data * data = new Data;
-	data->s1 = static_cast<std::string>(src->s1);
-	data->n = src->n;
-	data->s2 = static_cast<std::string>(src->s2);
-	delete src;
+
+	data->s1.assign(reinterpret_cast<char *>(raw), 8);
+	data->n = *reinterpret_cast<int *>(&reinterpret_cast<char *>(raw)[8]);
+	data->s2.assign(&reinterpret_cast<char *>(raw)[12], 8);
 	return data;
 }
 
@@ -57,14 +53,13 @@ int main(void)
 
 	ptr = serialize();
 	data = deserialize(ptr);
-	ptr = NULL;
-	
+		
 	std::cout << "Deserialized values" << std::endl;
 	std::cout << data->s1 << std::endl;
 	std::cout << data->n << std::endl;
 	std::cout << data->s2 << std::endl;
 
 	delete data;
-	data = NULL;
+	delete reinterpret_cast<char *>(ptr);
 	return 0;
 }
