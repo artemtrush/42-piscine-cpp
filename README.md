@@ -1,2 +1,0 @@
-# piscine-cpp
-piscine-cpp
